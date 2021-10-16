@@ -137,6 +137,9 @@ var ninetiesKid = function(movies) {
 // return an boolean stating if there exists a movie with a shorter
 // runtime than your time limit.
 // timeLimit is an integer representing a number of minutes.
+
+//https://www.notion.so/_-reduce-examples-8fb5081340ee4a12b4e72ef675cd4923
+
 var movieNight = function(movies, timeLimit) {
   var isShorter=_.reduce(movies, function(bool, curr){
     if(bool){
