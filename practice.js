@@ -139,7 +139,9 @@ var ninetiesKid = function(movies) {
 // timeLimit is an integer representing a number of minutes.
 var movieNight = function(movies, timeLimit) {
   var isShorter=_.reduce(movies, function(bool, curr){
-    return curr.runtime<timeLimit;
+    if(bool){
+      return true;}
+      return curr.runtime<timeLimit;
   },false);
   return isShorter;
 };
