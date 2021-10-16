@@ -121,17 +121,15 @@ _.reduce = function(collection, iterator, accumulator) {
 
 
 
-
-
-
 // given an array of movie data objects,return an array containing
 // movies that came out between 1990 and 2000.
 // TIP: use an array as your accumulator - don't push to an external array!
 var ninetiesKid = function(movies) {
   var result=_.reduce(movies, function(arr, a){
     if(a.releaseYear>=1990 && a.releaseYear<=2000){
-      return a.title;
+      arr.push(a.title);
     };
+    return arr;
 }, [])
   return result;
 };
@@ -155,14 +153,24 @@ var movieNight = function(movies, timeLimit) {
 // given an array of strings, use _.map to return a new array containing all
 // strings converted to uppercase letters.
 var upperCaseFruits = function(fruits) {
-
+  var allUpperCase=_.map(fruits, function(fruit){
+    return fruit.toUpperCase();
+})
+  return allUpperCase;
 };
 
 // given an array of dessert objects, return a new array of objects
 // that have a new "glutenFree" property, with a boolean value.
 // TIP: Items that contain flour are not gluten-free.
 var glutenFree = function(desserts) {
-
+  var newArr=_.map(desserts, function(dessert){
+    if(dessert.ingredients.includes('flour')){
+      dessert.glutenFree=true;
+    }else{
+      dessert.glutenFree=false;
+    }
+  })
+  return desserts;
 };
 
 // use _.map to return an array of items with their sale prices, with a new property
@@ -186,5 +194,6 @@ var glutenFree = function(desserts) {
 
 */
 var applyCoupon = function(groceries, coupon) {
+
 
 };
