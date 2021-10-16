@@ -79,44 +79,60 @@ var sumTotal = function(products) {
 // return an object consisting of dessert types and how many of each.
 // exampleOutput: { dessertType: 3, dessertType2: 1 }
 var dessertCategories = function(desserts) {
-  /*
-var dessertCategories = function(desserts) {
-  var result={};
-  var subResult=[];
-  for(var i=0; i<desserts.length; i++){
-	  var typeName=desserts[i].type;
-	  subResult.push(typeName);
+
+var typeCounts=_.reduce(desserts, function(counts, curr){
+  if(counts[curr.type]===undefined){
+    counts[curr.type]=1;
+  }else{
+    counts[curr.type]++;
   }
+  return counts;
+}, {})
 
-  var newSubResult=[...new Set(subResult)]
-  console.log(subResult)
-  console.log(newSubResult)
-
-  var count=1;
-
-  for(var i=0; i<subResult.length; i++){
-    if(result[subResult[i]]===undefined){
-		result[subResult[i]]=1
-	}else{
-		result[subResult[i]]++
-	}
-  }
-  return result;
+return typeCounts;
 };
 
-  */
+//   var result={};
 
-};
+//   _.each(desserts, function(val, index){
+//     if(result[val.type]===undefined){
+// 		result[val.type]=1
+// 	}else{
+// 		result[val.type]++
+// 	}
+// });
+//   return result;
+
+/*
+_.reduce = function(collection, iterator, accumulator) {
+    // TIP: To support both arrays and objects, try re-using each() here
+    var initial=arguments.length===2;
+    _.each(collection, function(value){
+      if(initial){
+        initial=false;
+        accumulator=value;
+      }else{
+        accumulator=iterator(accumulator, value);
+      }
+    })
+    return accumulator;
+  };
+*/
+
+
+
+
+
 
 // given an array of movie data objects,return an array containing
 // movies that came out between 1990 and 2000.
 // TIP: use an array as your accumulator - don't push to an external array!
 var ninetiesKid = function(movies) {
-  var result=_.reduce(Object.keys(movies), function(a){
-    if(movies[a].releaseYear>=1990 && movies[a]<=2000){
-      return movies[a]
+  var result=_.reduce(movies, function(arr, a){
+    if(a.releaseYear>=1990 && a.releaseYear<=2000){
+      return a.title;
     };
-});
+}, [])
   return result;
 };
 
@@ -124,9 +140,9 @@ var ninetiesKid = function(movies) {
 // runtime than your time limit.
 // timeLimit is an integer representing a number of minutes.
 var movieNight = function(movies, timeLimit) {
-  var isShorter=_.reduce(movies, function(currMovie){
-    return currMovie.runtime < timeLimit;
-  });
+  var isShorter=_.reduce(movies, function(bool, curr){
+    return curr.runtime<timeLimit;
+  },false);
   return isShorter;
 };
 
